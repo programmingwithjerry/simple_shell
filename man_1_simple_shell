@@ -1,0 +1,40 @@
+.TH custom_shell 1 "16 Nov 2022" "0.1" "custom_shell man page"
+
+.SH NAME
+.B custom_shell
+- A minimalist shell implemented in C designed for interaction with a Linux operating system.
+
+.SH SYNOPSIS
+ custom_shell [options] [file]
+
+.SH DESCRIPTION
+Shell, a term native to UNIX, denotes the interactive user interface within an operating system. Serving as the programming layer that comprehends
+and executes user-entered commands, the shell is often referred to as a command interpreter in certain systems. A shell typically implies an interface
+complete with a command syntax.
+
+.B Overview
+
+The custom shell is a command-line utility that processes input lines from either a file or the terminal, interprets them, and executes corresponding commands. Initiated upon user login, this program integrates numerous features to enhance interactive usage. Notably, the interpretative language remains consistent for both interactive sessions and non-interactive use (shell scripts). Users can either type commands directly into the running custom shell or store them in a file for direct execution by the shell.
+.SH Return Value
+
+Success is indicated by a return value of 0, while any other number signifies failure.
+
+.SH PATH
+
+The custom shell searches through all directories specified in the PATH environment variable to locate executables.
+
+.SH OPTIONS
+.B custom_shell
+Command options are appended after the main command, separated by a space and a
+ '-' symbol.
+
+.SH EXAMPLE
+
+[command] [options]
+$ ls -l
+
+.SH BUGS
+A single space is mandatory after each argument.
+
+.SH AUTHOR
+Onyekelu Chukwuebuka, Vatalis Ibeh.
