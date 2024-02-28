@@ -1,6 +1,4 @@
 #include "shell.h"
-
-
 /**
  * isjerry_print - formatted printing function
  * @format: format string similar to printf
@@ -13,8 +11,6 @@
  * stream (likely standard output).
  * Return: Number of bytes written on success, or -1 on error.
  */
-
-
 int isjerry_print(const char *format, ...)
 {
 	va_list args;
@@ -60,7 +56,6 @@ int isjerry_print(const char *format, ...)
 	va_end(args_copy); /* Clean up the copied va_list*/
 	return (0); /* Indicate success */
 }
-
 
 
 
