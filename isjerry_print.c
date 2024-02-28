@@ -14,51 +14,47 @@
  * Return: Number of bytes written on success, or -1 on error.
  */
 
-
 int isjerry_print(const char *format, ...)
 {
-	va_list args;
-	va_list args_copy; /*Create a copy of the va_list*/
-	int length;
-	char *message;
-	ssize_t bytes_written;
+	va_list args, copy;
+	int len;
+	char *buf;
+	/*buf = malloc(len + 1);*/
 
-	if (format == NULL || format[strlen(format)] != '\0')
+	if (!format || format[strlen(format)] != '\0')
 	{
-		return (-1); /* Indicate error: null-termination missing */
+		return (-1);
 	}
 	va_start(args, format);
-	va_copy(args_copy, args);
-	length = vsnprintf(NULL, 0, format, args_copy);
-	if (length < 0)
+	va_copy(copy, args);
+
+	len = vsnprintf(NULL, 0, format, copy);
+	va_end(copy);
+
+	if (len < 0)
 	{
-		perror("vsnprintf"); /* Print error message if vsnprintf fails */
-		va_end(args); /* Clean up the original va_list*/
-		va_end(args_copy); /* Clean up the copied va_list*/
-		return (-1); /* Indicate error */
+		perror("vsnprintf");
+		return (-1);
 	}
-	message = (char *)malloc(length + 1); /* +1 for the null terminator */
-	if (message == NULL)
+	buf = malloc(len + 1);
+	if (!buf)
 	{
-		perror("malloc"); /* Print error message if malloc fails */
-		va_end(args); /* Clean up the original va_list*/
-		va_end(args_copy); /* Clean up the copied va_list*/
-		return (-1); /* Indicate error */
+		perror("malloc");
+		return (-1);
 	}
-	vsnprintf(message, length + 1, format, args);
-	bytes_written = write(STDOUT_FILENO, message, strlen(message));
-	if (bytes_written == -1)
+
+	va_start(args, format);
+	vsnprintf(buf, len + 1, format, args);
+	va_end(args);
+
+	if (write(STDOUT_FILENO, buf, len) == -1)
 	{
-		perror("write"); /* Print error message if write fails */
-		free(message); /* Free the allocated memory */
-		va_end(args); /* Clean up the original va_list*/
-		va_end(args_copy); /* Clean up the copied va_list*/
-		return (-1); /* Indicate error */
+		perror("write");
+		free(buf);
+		return (-1);
 	}
-	free(message);
-	va_end(args); /* Clean up the original va_list*/
-	va_end(args_copy); /* Clean up the copied va_list*/
-	return (0); /* Indicate success */
+	free(buf);
+	return (0);
 }
 
 
