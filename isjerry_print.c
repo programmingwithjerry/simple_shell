@@ -1,6 +1,4 @@
 #include "shell.h"
-
-
 /**
  * isjerry_print - formatted printing function
  * @format: format string similar to printf
@@ -56,7 +54,6 @@ int isjerry_print(const char *format, ...)
 	free(buf);
 	return (0);
 }
-
 
 
 
