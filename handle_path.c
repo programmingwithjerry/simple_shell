@@ -20,7 +20,7 @@ void execute_path_command(const char *command)
 	pid_t pid;
 	int status;
 	int fd[2];
-	char buffer[1024];
+	char buffer[1024], *token, *command_copy, *path, *path_copy, *dir;
 	ssize_t nbytes;
 
 	pid = fork();
@@ -38,14 +38,6 @@ void execute_path_command(const char *command)
 
 	if (pid == 0)
 	{ /* Child process*/
-		char *token;
-		char *command_copy;
-		char *path;
-		char *path_copy;
-		char *dir;
-		/*char buffer[1024];*/
-		/*ssize_t nbytes;*/
-
 		close(fd[0]); /*Close read end of pipe*/
 		dup2(fd[1], STDOUT_FILENO); /* Redirect stdout to pipe write end*/
 		close(fd[1]); /* Close write end of pipe*/
@@ -82,14 +74,8 @@ void execute_path_command(const char *command)
 	else
 	{ /*Parent process*/
 		close(fd[1]); /*Close write end of pipe*/
-
-		/*char buffer[1024];*/
-		/*ssize_t nbytes;*/
-
 		while ((nbytes = read(fd[0], buffer, sizeof(buffer))) > 0)
-		{
 			write(STDOUT_FILENO, buffer, nbytes); /*Write output to stdout*/
-		}
 
 		close(fd[0]); /*Close read end of pipe*/
 
