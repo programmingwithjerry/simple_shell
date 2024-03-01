@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
 	while(1)
 	{
 		prompt_user();
-		execute_exit_command();
+		/*execute_exit_command();*/
 		/*get_command(input, input_size);*/
 		our_get_command(input, input_size);
 		execute_path_command("/bin/ls");

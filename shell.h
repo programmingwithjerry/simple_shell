@@ -26,7 +26,7 @@ struct Alias
 
 struct Alias aliases[MAX_ALIASES];
 
-int main(int argc, char *argv[]);
+/*int main(int argc, char *argv[]);*/
 void prompt_user(void);
 void our_get_command(char *command, size_t size);
 /*void getAndPrintCommand();*/
