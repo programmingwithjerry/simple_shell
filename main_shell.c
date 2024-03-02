@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
 	{
 		prompt_user();
 		execute_exit_command();
-		get_command(input, input_size);
+		/*get_command(input, input_size);*/
 		our_get_command(input, input_size);
 		execute_path_command("/bin/ls");
 		execute_path_command("ls -l /tmp");
@@ -25,12 +25,12 @@ int main(int argc, char *argv[]) {
 			exit(EXIT_FAILURE);
 		}
 
-		*my_semicolon_handler(input);
+		/*my_semicolon_handler(input);*/
 		isjerry_semicolon_handler(input);
-		my_or_handler(input);
+		/*my_or_handler(input);*/
 		isjerry_or_handler(input);
 		isjerry_alias_builtin(argc, argv);
-		alias_builtin(argc, argv);
+		/*alias_builtin(argc, argv);*/
 		for (i = 0; i < alias_count; i++) {
 			free(aliases[i].name);
 			free(aliases[i].value);
